@@ -1,0 +1,12 @@
+{
+  "name": "Fuel log",
+  "short_name": "Fuel",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#efe8dc",
+  "theme_color": "#efe8dc",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

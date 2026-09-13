@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="40" fill="#1c1915"/>
+  <circle cx="90" cy="90" r="64" fill="#2f6a4d"/>
+  <circle cx="90" cy="90" r="48" fill="none" stroke="#f3eadc" stroke-width="6"/>
+  <text x="90" y="108" text-anchor="middle" font-size="72" font-family="-apple-system,system-ui,sans-serif" font-weight="700" fill="#f3eadc">F</text>
+</svg>
