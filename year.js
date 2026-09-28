@@ -55,24 +55,6 @@ bind=function(){
   });
   var old=document.getElementById('token-strip');
   if(old)old.remove();
-  var tok=state.settings&&(state.settings.syncToken||'').trim();
-  if(!tok)return;
-  var strip=document.createElement('p');
-  strip.id='token-strip';
-  strip.className='syncok';
-  strip.textContent='Synced';
-  var btn=document.createElement('button');
-  btn.type='button';
-  btn.id='copy-token';
-  btn.textContent='Copy token';
-  btn.onclick=function(){
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(tok).then(function(){toast('Token copied');}).catch(function(){toast('Could not copy');});
-    }else toast('Could not copy');
-  };
-  strip.appendChild(btn);
-  var top=document.querySelector('.top');
-  if(top)top.appendChild(strip);
 };
 lastHash='';
 render();
