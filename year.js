@@ -42,5 +42,35 @@ render=function(){
   document.getElementById('app').innerHTML=banner+renderYear();
   bind();
 };
+var _bindToken=bind;
+bind=function(){
+  _bindToken();
+  var actions=document.querySelector('.actions');
+  var tok=state.settings&&(state.settings.syncToken||'').trim();
+  if(!actions||!tok||document.getElementById('copy-token'))return;
+  var b=document.createElement('button');
+  b.className='ghost';
+  b.id='copy-token';
+  b.type='button';
+  b.textContent='Copy sync token';
+  b.onclick=function(){
+    var t=(state.settings.syncToken||'').trim();
+    var box=document.getElementById('token-reveal');
+    if(!box){
+      box=document.createElement('input');
+      box.id='token-reveal';
+      box.readOnly=true;
+      box.setAttribute('aria-label','Sync token');
+      actions.parentNode.insertBefore(box,actions.nextSibling);
+    }
+    box.value=t;
+    box.focus();
+    box.select();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(t).then(function(){toast('Token copied');}).catch(function(){toast('Select the token and copy it');});
+    }else toast('Select the token and copy it');
+  };
+  actions.appendChild(b);
+};
 lastHash='';
 render();
