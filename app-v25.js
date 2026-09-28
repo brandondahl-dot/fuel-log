@@ -2,7 +2,7 @@ window.onerror=function(m,s,l){var a=document.getElementById('app');if(a)a.textC
 const VERSION='1.15';
 const STORE='fuel-log-v1';
 const SEED_ID='2026-09-13-common-meals';
-function defaultSettings(){return{protein:160,calories:2900,carbs:215,fat:90,apiKey:'',savedMeals:[{id:'smoothie',name:'Morning smoothie',protein:35,carbs:55,fat:40,calories:630},{id:'beef-bowl',name:'Beef bowl',protein:52,carbs:27,fat:37,calories:650},{id:'lodge-breakfast',name:'Lodge breakfast',protein:36,carbs:68,fat:52,calories:880}]};}
+function defaultSettings(){return{protein:160,calories:2900,carbs:215,fat:90,apiKey:'',savedMeals:[{id:'smoothie',name:'Smoothie',protein:38,carbs:86,fat:44,calories:870,note:'2 scoops Flip 7, 10 oz coconut water, 1 cup blueberries, 1/2 cup oats, 1/4 cup pumpkin seeds, 1 Tbsp almond butter, 1 Tbsp olive oil'},{id:'beef-bowl',name:'Beef bowl',protein:52,carbs:27,fat:37,calories:650},{id:'lodge-breakfast',name:'Lodge breakfast',protein:36,carbs:68,fat:52,calories:880}]};}
 function screenshotDay(){return{date:'2026-09-12',weight:170,habit:true,note:'Fibre after dinner.',meals:[{id:'s1',time:'10:00',name:'Smoothie (no fibre powders)',protein:35,carbs:55,fat:40,calories:630,note:''},{id:'s2',time:'13:00',name:'Beef bowl',protein:52,carbs:27,fat:37,calories:650,note:''},{id:'s3',time:'18:30',name:'Filet, rice, slaw',protein:51,carbs:38,fat:42,calories:735,note:''},{id:'s4',time:'18:50',name:'Ginger tea',protein:0,carbs:6,fat:5,calories:66,note:''}]};}
 function lodgeDay(){return{date:'2026-09-13',weight:null,habit:false,note:'',meals:[{id:'s5',time:'11:00',name:'Lodge breakfast',protein:36,carbs:68,fat:52,calories:880,note:''}]};}
 function emptyDay(d){return{date:d,weight:null,habit:false,note:'',meals:[]};}
