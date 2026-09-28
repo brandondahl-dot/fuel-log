@@ -61,8 +61,22 @@ bind=function(){
   input.readOnly=true;
   input.value=tok;
   input.setAttribute('aria-label','Sync token');
+  var btn=document.createElement('button');
+  btn.className='primary';
+  btn.type='button';
+  btn.id='copy-token';
+  btn.textContent='Copy';
+  btn.style.marginTop='10px';
+  btn.onclick=function(){
+    input.focus();
+    input.select();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(tok).then(function(){toast('Token copied');}).catch(function(){toast('Hold the token and copy it');});
+    }else toast('Hold the token and copy it');
+  };
   strip.appendChild(k);
   strip.appendChild(input);
+  strip.appendChild(btn);
   var app=document.getElementById('app');
   app.parentNode.insertBefore(strip, app);
 };
