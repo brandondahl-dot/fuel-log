@@ -45,40 +45,34 @@ render=function(){
 var _bindToken=bind;
 bind=function(){
   _bindToken();
+  document.querySelectorAll('[data-day]').forEach(function(b){
+    b.onclick=function(){
+      viewDate=b.getAttribute('data-day');
+      tab='today';
+      lastHash='';
+      render();
+    };
+  });
   var old=document.getElementById('token-strip');
   if(old)old.remove();
   var tok=state.settings&&(state.settings.syncToken||'').trim();
   if(!tok)return;
-  var strip=document.createElement('div');
+  var strip=document.createElement('p');
   strip.id='token-strip';
-  strip.className='hero';
-  strip.style.marginBottom='12px';
-  var k=document.createElement('div');
-  k.className='kicker';
-  k.textContent='Sync token';
-  var input=document.createElement('input');
-  input.id='token-reveal';
-  input.readOnly=true;
-  input.value=tok;
-  input.setAttribute('aria-label','Sync token');
+  strip.className='syncok';
+  strip.textContent='Synced';
   var btn=document.createElement('button');
-  btn.className='primary';
   btn.type='button';
   btn.id='copy-token';
-  btn.textContent='Copy';
-  btn.style.marginTop='10px';
+  btn.textContent='Copy token';
   btn.onclick=function(){
-    input.focus();
-    input.select();
     if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(tok).then(function(){toast('Token copied');}).catch(function(){toast('Hold the token and copy it');});
-    }else toast('Hold the token and copy it');
+      navigator.clipboard.writeText(tok).then(function(){toast('Token copied');}).catch(function(){toast('Could not copy');});
+    }else toast('Could not copy');
   };
-  strip.appendChild(k);
-  strip.appendChild(input);
   strip.appendChild(btn);
-  var app=document.getElementById('app');
-  app.parentNode.insertBefore(strip, app);
+  var top=document.querySelector('.top');
+  if(top)top.appendChild(strip);
 };
 lastHash='';
 render();
