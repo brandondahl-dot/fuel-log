@@ -25,7 +25,7 @@ function renderYear(){
     var days=logged.filter(function(d){return d.date.slice(0,7)===key;});
     var ak=days.length?Math.round(days.reduce(function(a,d){return a+totals(d).calories;},0)/days.length):0;
     var ap=days.length?Math.round(days.reduce(function(a,d){return a+totals(d).protein;},0)/days.length):0;
-    var right=days.length?(ak+' kcal \u00b7 P '+ap+' \u00b7 '+days.length+(days.length===1?' day':' days')):'\u2014';
+    var right=days.length?(ak+' kcal · P '+ap+' · '+days.length+(days.length===1?' day':' days')):'—';
     return '<div class="yrow"><b>'+monthLabel(key)+'</b><span>'+right+'</span></div>';
   }).join('');
   return '<h2 style="margin:0 0 4px">Year</h2><p class="muted" style="margin:0 0 12px">Rolling 12 months</p><div class="tiles"><div class="tile"><div class="kicker">Avg kcal</div><div class="n">'+Math.round(avgK)+'</div></div><div class="tile"><div class="kicker">Avg protein</div><div class="n">'+Math.round(avgP)+'</div></div><div class="tile"><div class="kicker">Hit protein</div><div class="n">'+hit+'/'+(logged.length||0)+'</div></div></div>'+rows+renderSettings();
@@ -45,32 +45,26 @@ render=function(){
 var _bindToken=bind;
 bind=function(){
   _bindToken();
-  var actions=document.querySelector('.actions');
+  var old=document.getElementById('token-strip');
+  if(old)old.remove();
   var tok=state.settings&&(state.settings.syncToken||'').trim();
-  if(!actions||!tok||document.getElementById('copy-token'))return;
-  var b=document.createElement('button');
-  b.className='ghost';
-  b.id='copy-token';
-  b.type='button';
-  b.textContent='Copy sync token';
-  b.onclick=function(){
-    var t=(state.settings.syncToken||'').trim();
-    var box=document.getElementById('token-reveal');
-    if(!box){
-      box=document.createElement('input');
-      box.id='token-reveal';
-      box.readOnly=true;
-      box.setAttribute('aria-label','Sync token');
-      actions.parentNode.insertBefore(box,actions.nextSibling);
-    }
-    box.value=t;
-    box.focus();
-    box.select();
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(t).then(function(){toast('Token copied');}).catch(function(){toast('Select the token and copy it');});
-    }else toast('Select the token and copy it');
-  };
-  actions.appendChild(b);
+  if(!tok)return;
+  var strip=document.createElement('div');
+  strip.id='token-strip';
+  strip.className='hero';
+  strip.style.marginBottom='12px';
+  var k=document.createElement('div');
+  k.className='kicker';
+  k.textContent='Sync token';
+  var input=document.createElement('input');
+  input.id='token-reveal';
+  input.readOnly=true;
+  input.value=tok;
+  input.setAttribute('aria-label','Sync token');
+  strip.appendChild(k);
+  strip.appendChild(input);
+  var app=document.getElementById('app');
+  app.parentNode.insertBefore(strip, app);
 };
 lastHash='';
 render();
